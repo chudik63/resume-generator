@@ -37,7 +37,7 @@ func GenerateResume() {
 		University: data["university_name"].(string),
 		Faculty:    data["faculty_name"].(string),
 		BirthDate:  data["bdate"].(string),
-		DateTime:   time.Now().String(),
+		DateTime:   time.Now().Format("02.01.2006 15:04"),
 	}
 	tmpl, _ := template.ParseFiles(TemplateFileName)
 	publicFile, err := os.OpenFile(PublicFileName, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
