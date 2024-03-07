@@ -23,6 +23,11 @@ func get() []byte {
 		log.Fatal("No method found")
 	}
 
+	fields, exists := os.LookupEnv("fields")
+	if !exists {
+		log.Fatal("No fields found")
+	}
+
 	id, exists := os.LookupEnv("vk_id")
 	if !exists {
 		log.Fatal("No vk_id found")
@@ -33,7 +38,7 @@ func get() []byte {
 		log.Fatal("No token found")
 	}
 
-	resp, _ := http.Get(fmt.Sprintf("https://api.vk.com/method/%s?user_ids=%s&fields=bdate,education&access_token=%s&v=5.131", method, id, token))
+	resp, _ := http.Get(fmt.Sprintf("https://api.vk.com/method/%s?user_ids=%s&fields=%s&access_token=%s&v=5.131", method, fields, id, token))
 	body, _ := ioutil.ReadAll(resp.Body)
 	return body
 }
