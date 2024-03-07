@@ -3,15 +3,44 @@
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-        <title>Document</title>
+        <link rel="stylesheet" href="style.css">
+        <title>Resume page</title>
 </head>
 <body>
-    <h1>Резюме</h1>
-    <b>Имя: </b>{{ .FirstName }}<br>
-    <b>Фамилия: </b>{{ .LastName }}<br>
-    <b>Университет: </b>{{ .University }}<br>
-    <b>Факультет: </b>{{ .Faculty }}<br>
-    <b>Дата рождения: </b>{{ .BirthDate }}<br>
-    <b>Дата создания:</b> {{ .DateTime }}<br>
+    <header>
+        <h1>{{ .FirstName }} {{ .LastName }}</h1>
+        <p>Резюме</p>
+    </header>
+
+    <section id="about">
+        <h2>О себе</h2>
+        <ul>
+            <li>Дата рождения: {{ .BirthDate }}</li>
+            <li>Город: {{ .City }}</li>
+        </ul>
+    </section>
+
+    <section id="education">
+        <h2>Образование</h2>
+        <ul>
+            <li><strong>{{ .University }}</strong></li>
+            <li>{{ .Faculty }}</li>
+            <li><i>Год окончания: {{ .Graduation }}</i></li>
+        </ul>
+    </section>
+
+    <section id="experience">
+        <h2>Опыт работы</h2>
+        <ul>
+            <li><strong>{{ .Experience.Company }}</strong></li>
+            <li>{{ .Experience.Position }}</li>
+            <li><i>{{ .Experience.From }} - {{ .Experience.Until }}</i></li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Email: ваш.email@example.com | Дата создания: {{ .DateTime }}</p>
+    </footer>
+
 </body>
 </html>
