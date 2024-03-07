@@ -15,6 +15,7 @@ git clone https://git.miem.hse.ru/biv23x-ps/vivinaumov.git
 cd vivinaumov
 touch .env
 echo "method = "users.get"
+     fields = "bdate,education,city,career"
      vk_id = "YOUR ID"
      token = "YOUR TOKEN" " >> .env
 ```
