@@ -38,7 +38,7 @@ func get() []byte {
 		log.Fatal("No token found")
 	}
 
-	resp, _ := http.Get(fmt.Sprintf("https://api.vk.com/method/%s?user_ids=%s&fields=%s&access_token=%s&v=5.131", method, fields, id, token))
+	resp, _ := http.Get(fmt.Sprintf("https://api.vk.com/method/%s?user_ids=%s&fields=%s&access_token=%s&v=5.131", method, id, fields, token))
 	body, _ := ioutil.ReadAll(resp.Body)
 	return body
 }
