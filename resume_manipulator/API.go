@@ -2,12 +2,23 @@ package resume_manipulator
 
 import (
 	"encoding/json"
-	"fmt"
+	"html/template"
 	"log"
 	"os"
+	"time"
 )
 
-const ResumeFileName string = "resume.txt"
+const TemplateFileName string = "templates/index.html"
+const PublicFileName string = "public/index.html"
+
+type Content struct {
+	FirstName  string
+	LastName   string
+	University string
+	Faculty    string
+	BirthDate  string
+	DateTime   string
+}
 
 func GenerateResume() {
 	message := map[string][]map[string]interface{}{
@@ -16,38 +27,26 @@ func GenerateResume() {
 	resp := get()
 	err := json.Unmarshal(resp, &message)
 	if err != nil {
-		log.Fatal("Json reading error")
+		log.Fatal(err)
 	}
 
 	data := message["response"][0]
-
-	file, err := os.Create(ResumeFileName)
-	if err != nil {
-		fmt.Println("Unable to create file:", err)
-		os.Exit(1)
+	info := Content{
+		FirstName:  data["first_name"].(string),
+		LastName:   data["last_name"].(string),
+		University: data["university_name"].(string),
+		Faculty:    data["faculty_name"].(string),
+		BirthDate:  data["bdate"].(string),
+		DateTime:   time.Now().String(),
 	}
-
-	resume := []byte(fmt.Sprintf("<html>"+
-		"<body>"+
-		"<h1>Резюме</h1>"+
-		"<b>Имя: </b>%s<br>"+
-		"<b>Фамилия: </b>%s<br>"+
-		"<b>Университет: </b>%s<br>"+
-		"<b>Факультет: </b>%s<br>"+
-		"<b>Дата рождения: </b>%s<br>"+
-		"</body>"+
-		"</html>", data["first_name"], data["last_name"], data["university_name"], data["faculty_name"], data["bdate"]))
-
-	_, err = file.Write(resume)
+	tmpl, _ := template.ParseFiles(TemplateFileName)
+	publicFile, err := os.OpenFile(PublicFileName, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
-}
 
-func GetResume() []byte {
-	data, err := os.ReadFile(ResumeFileName)
+	err = tmpl.Execute(publicFile, &info)
 	if err != nil {
 		log.Fatal(err)
 	}
-	return data
 }
