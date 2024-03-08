@@ -11,34 +11,35 @@
         <h1>{{ .FirstName }} {{ .LastName }}</h1>
         <p>Резюме</p>
     </header>
+    
+    <div class="wrapper">
 
-    <section id="about">
-        <h2>О себе</h2>
-        <ul>
-            <li>Дата рождения: {{ .BirthDate }}</li>
-            <li>{{if .City }} Город: {{ .City }} {{end}}</li>
-        </ul>
-    </section>
+        <section>
+            <h2>О себе</h2>
+            <ul>
+                <li>Дата рождения: {{ .BirthDate }}</li>
+                <li>{{if .City }} Город: {{ .City }} {{end}}</li>
+            </ul>
+        </section>
 
-    <section id="education">
-        <h2>Образование</h2>
-        <ul>
-            <li><strong>{{ .University }}</strong></li>
-            <li>{{ .Faculty }}</li>
-            <li><i>{{if .Graduation }} Год окончания: {{ .Graduation }} {{end}}</i></li>
-        </ul>
-    </section>
+        <section>
+            <h2>Образование</h2>
+            <ul>
+                <li><strong>{{ .University }}</strong></li>
+                <li>{{ .Faculty }}</li>
+                <li><i>{{if .Graduation }} Год окончания: {{ .Graduation }} {{end}}</i></li>
+            </ul>
+        </section>
 
-    <section id="experience">
-        <h2>Опыт работы</h2>
-        <ul>
-            <li><strong>{{ .Experience.Company }}</strong></li>
-            <li>{{ .Experience.Position }}</li>
-            <li><i>{{if .Experience.From }} {{ .Experience.From }} - {{ .Experience.Until }} {{end}}</i></li>
-        </ul>
-    </section>
-
-
+        <section>
+            <h2>Опыт работы</h2>
+            <ul>
+                <li><strong>{{ .Experience.Company }}</strong></li>
+                <li>{{ .Experience.Position }}</li>
+                <li><i>{{if .Experience.From }} {{ .Experience.From }} - {{ .Experience.Until }} {{end}}</i></li>
+            </ul>
+        </section>
+    </div>
     <footer>
         <p>Дата создания: {{ .DateTime }}</p>
     </footer>
