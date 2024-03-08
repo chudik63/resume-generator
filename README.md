@@ -18,6 +18,7 @@ id страниц (id должен представлять собой набо�
 ```
 git clone https://git.miem.hse.ru/biv23x-ps/vivinaumov.git
 cd vivinaumov
+git switch develop
 touch .env
 echo "method = "users.get"
      fields = "bdate,education,city,career"
