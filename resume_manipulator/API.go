@@ -41,7 +41,6 @@ func GenerateResume() {
 	}
 
 	data := message["response"][0]
-	career := data["career"].([]interface{})[0].(map[string]interface{})
 	info := Content{}
 	info.FirstName = data["first_name"].(string)
 	info.LastName = data["last_name"].(string)
@@ -54,8 +53,9 @@ func GenerateResume() {
 		info.Faculty = data["faculty_name"].(string)
 		info.Graduation = data["graduation"].(float64)
 	}
-	if comp := career["company"]; comp != nil {
-		info.Experience = Career{Company: comp.(string), From: career["from"].(float64), Until: career["until"].(float64), Position: career["position"].(string)}
+	if career := data["career"].([]interface{}); len(career) != 0 {
+		work := career[0].(map[string]interface{})
+		info.Experience = Career{Company: work["company"].(string), From: work["from"].(float64), Until: work["until"].(float64), Position: work["position"].(string)}
 	}
 	info.DateTime = time.Now().Format("02.01.2006 15:04")
 
