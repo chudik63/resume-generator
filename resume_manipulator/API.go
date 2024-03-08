@@ -42,9 +42,11 @@ func GenerateResume() {
 
 	data := message["response"][0]
 	info := Content{}
+
 	info.FirstName = data["first_name"].(string)
 	info.LastName = data["last_name"].(string)
 	info.BirthDate = data["bdate"].(string)
+
 	if city := data["city"]; city != nil {
 		info.City = city.(map[string]interface{})["title"].(string)
 	}
