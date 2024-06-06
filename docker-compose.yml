@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  main:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+    - "8080:8080"
+    environment:
+    - TZ=Europe/Moscow
+    - method=users.get
+    - fields=bdate,education,city,career
+    - vk_id=<ID>
+    - token=<TOKEN>
